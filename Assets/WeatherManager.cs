@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class WeatherManager {
+public class WeatherManager : MonoBehaviour {
+
+   Weather weather;
+   public Material[] skyboxes;
 
    private const string xmlApi = "http://api.openweathermap.org/geo/1.0/direct?q=Orlando&limit=5&appid=db9758f0e415c0abd573c95394891c7b";
 
@@ -23,6 +26,12 @@ public class WeatherManager {
 
    public IEnumerator GetWeatherXML(Action<string> callback) {
       return CallAPI(xmlApi, callback);
+   }
+
+   void Start() {
+      weather = this.GetComponent<Weather>();
+      //weather.light = this.GetComponent<Light>();
+      weather.SetWeather(/*weather.Sunrise,*/ 2, skyboxes[0]);
    }
 
 }
